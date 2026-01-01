@@ -401,6 +401,43 @@ footer{
   .map-info p { font-size: 13px; }
   .map-info a { padding: 8px 18px; font-size: 14px; }
 }
+.hero-buttons {
+  display: flex;         /* تجعل الزرين في صف واحد */
+  gap: 15px;             /* المسافة بين الزرين */
+  justify-content: center; /* لتوسيط الزرين في الصفحة */
+  margin-top: 20px;      /* مسافة من النص */
+}
+
+.hero-buttons a {
+  display: inline-block;
+  padding: 14px 30px;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 50px; /* حواف دائرية أكثر أناقة */
+  background: linear-gradient(135deg, #0f4c81, #1a73b8); /* Gradient جذاب */
+  box-shadow: 0 8px 20px rgba(15,76,129,0.3); /* ظل خفيف */
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 10;
+}
+
+/* تأثير Hover */
+.hero-buttons a:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 25px rgba(15,76,129,0.5);
+}
+
+/* نسخة الهاتف */
+@media(max-width:900px){
+  .hero-buttons a {
+    width: 100%;      /* يملأ العرض على الهاتف */
+    text-align: center;
+    padding: 12px 0;
+  }
+}
+
 </style>
 </head>
 <body>
