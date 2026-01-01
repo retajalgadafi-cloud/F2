@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>شركة الفهد الجديدة للمعدات الطبية</title>
+
+<!-- خط Cairo -->
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<!-- أيقونات Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<!-- مكتبة AOS للأنيميشن عند التمرير -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+
+<style>
+/* ===== أساسيات ===== */
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Cairo',sans-serif;
+  background:#f5f7fb;
+  color:#1a1a1a;
+}
+a{text-decoration:none;color:inherit}
+.container{max-width:1200px;margin:auto;padding:0 15px}
+
+/* ===== الهيدر ===== */
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:linear-gradient(180deg,#0b3c5d,#0f6aa3);
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 15px;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.logo img{
+  height:60px;
+  background:#fff;
+  padding:4px;
+  border-radius:8px;
+}
+.company-info h1{font-size:18px;color:#fff;}
+
+/* منيو لابتوب */
+nav.desktop{
+  display:flex;
+  gap:20px;
+}
+nav.desktop a{
+  color:#fff;
+  font-weight:600;
+  padding:6px 10px;
+  border-radius:6px;
+  transition:0.3s;
+}
+nav.desktop a:hover{
+  background:rgba(255,255,255,.15)
+}
+
+/* زر الهاتف */
+.menu-btn{
+  display:none;
+  font-size:28px;
+  color:#fff;
+  background:none;
+  border:none;
+}
+
+/* منيو الهاتف */
+.mobile-menu{
+  position:fixed;
+  top:0;
+  right:-320px;
+  width:300px;
+  height:100%;
+  background:#0b3c5d;
+  padding:80px 20px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  transition:.35s ease;
+  z-index:9999;
+}
+.mobile-menu.show{right:0}
+.mobile-menu a{
+  color:#fff;
+  font-size:18px;
+  font-weight:700;
+  transition:0.3s;
+}
+.mobile-menu a:hover{
+  background: rgba(255,255,255,0.15);
+  border-radius:8px;
+}
+
+/* overlay */
+.mobile-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  opacity:0;
+  visibility:hidden;
+  transition:.3s;
+  z-index:9998;
+}
+.mobile-overlay.show{
+  opacity:1;
+  visibility:visible;
+}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;
+  overflow:hidden;
+  background: linear-gradient(to left,#0f4c81,#1a73b8);
+  color:#fff;
+  padding:70px 15px 60px;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: url('https://images.pexels.com/photos/6129044/pexels-photo-6129044.jpeg') center/cover no-repeat;
+  opacity:0.25;
+  z-index:0;
+}
+.hero-inner{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:30px;
+  align-items:center;
+  position:relative;
+  z-index:1;
+}
+.hero h2{
+  font-size:32px;
+  margin-bottom:15px;
+  font-weight:800;
+}
+.hero p{
+  font-size:17px;
+  margin-bottom:25px;
+}
+.hero a{
+  display:inline-block;
+  background: linear-gradient(90deg,#ffd166,#ffba49);
+  color:#1a1a1a;
+  padding:14px 28px;
+  border-radius:10px;
+  font-weight:700;
+  transition: 0.3s;
+}
+.hero a:hover{
+  transform: scale(1.05);
+}
+
+/* ===== معلومات سريعة ===== */
+.quick-info{
+  margin-top:-40px;
+}
+.info-card{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+}
+.info-item{
+  text-align:center;
+  background:#fff;
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.info-item:hover{
+  transform: translateY(-5px);
+  box-shadow:0 25px 60px rgba(0,0,0,0.15);
+}
+.info-item i{
+  font-size:24px;
+  color:#0f4c81;
+  margin-bottom:8px;
+  display:block;
+}
+
+/* ===== الأقسام ===== */
+section{padding:70px 0}
+.section-title{
+  text-align:center;
+  margin-bottom:35px;
+}
+.section-title h2, .section-title h3{
+  color:#0f4c81;
+}
+
+/* من نحن */
+.about{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:25px;
+}
+.card{
+  background:#fff;
+  padding:22px;
+  border-radius:20px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover{
+  transform: translateY(-5px);
+  box-shadow:0 25px 60px rgba(0,0,0,0.15);
+}
+
+/* نقاط القوة */
+.features{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+}
+.feature{
+  background:#fff;
+  padding:20px;
+  border-radius:20px;
+  text-align:center;
+  font-weight:600;
+  box-shadow:0 15px 40px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.feature:hover{
+  transform: translateY(-5px);
+  box-shadow:0 25px 60px rgba(0,0,0,0.15);
+}
+.feature i{
+  font-size:28px;
+  color:#0f4c81;
+  margin-bottom:12px;
+  display:block;
+  transition: transform 0.3s, color 0.3s;
+}
+.feature:hover i{
+  color:#ffd166;
+  transform: scale(1.3);
+}
+
+/* تواصل */
+.contact{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+input,textarea{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid #ccc;
+  margin-bottom:10px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+input:focus,textarea:focus{
+  border-color:#0f4c81;
+  box-shadow:0 0 10px rgba(15,76,129,0.2);
+}
+button{
+  background: linear-gradient(90deg,#0f4c81,#1a73b8);
+  color:#fff;
+  border:none;
+  padding:12px 20px;
+  border-radius:12px;
+  font-size:15px;
+  font-weight:700;
+  transition: transform 0.3s;
+}
+button:hover{
+  transform: scale(1.05);
+}
+
+/* فوتر */
+footer{
+  background:#0f1924;
+  color:#d0d3da;
+  text-align:center;
+  padding:25px;
+  font-size:13px;
+}
+
+/* واتساب */
+.whatsapp-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:55px;
+  height:55px;
+  background:#25d366;
+  color:#fff;
+  font-size:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  box-shadow:0 8px 20px rgba(0,0,0,.25);
+  z-index:9999;
+  transition:transform .3s;
+}
+.whatsapp-btn:hover{
+  transform:scale(1.1);
+}
+
+/* الهاتف */
+@media(max-width:900px){
+  nav.desktop,.company-info{display:none}
+  .menu-btn{display:block}
+  .hero-inner,.about,.contact{grid-template-columns:1fr}
+  .hero{text-align:center}
+}
+@media(max-width:768px){
+  .map-box iframe{height:260px;}
+  .map-info a{width:100%;}
+}
+.map-box {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  width: 100%;
+  height: 450px; /* ارتفاع مناسب للكمبيوتر */
+  margin-top: 30px;
+}
+
+.map-box iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Map Info البطاقة */
+.map-info {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.95);
+  padding: 18px 25px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  max-width: 350px;
+  width: 90%;  /* لضمان التناسب على الهاتف */
+}
+
+.map-info h4 {
+  color: #0f4c81;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.map-info p {
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.map-info a {
+  display: inline-block;
+  background: linear-gradient(90deg,#0f4c81,#1a73b8);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.map-info a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(15,76,129,0.4);
+}
+
+/* ===== Responsive ===== */
+@media(max-width: 992px){
+  .map-box { height: 400px; }
+}
+
+@media(max-width: 768px){
+  .map-box { height: 300px; }
+  .map-info {
+    bottom: 15px;
+    padding: 15px;
+    max-width: 90%;
+  }
+  .map-info h4 { font-size: 16px; }
+  .map-info p { font-size: 13px; }
+  .map-info a { padding: 8px 18px; font-size: 14px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner container">
+    <div class="logo">
+      <img src="images/logo.jpeg" alt="شعار الشركة">
+      <div class="company-info">
+        <h1>شركة الفهد الجديدة</h1>
+      </div>
+    </div>
+    <nav class="desktop">
+      <a href="#">الرئيسية</a>
+      <a href="#about">عن الشركة</a>
+      <a href="#contact">تواصل معنا</a>
+    </nav>
+    <button class="menu-btn" onclick="openMenu()">☰</button>
+  </div>
+</header>
+
+<div class="mobile-overlay" id="overlay" onclick="closeMenu()"></div>
+<nav class="mobile-menu" id="menu">
+  <button class="close-menu" onclick="closeMenu()">×</button>
+  <a href="#" onclick="closeMenu()">الرئيسية</a>
+  <a href="#about" onclick="closeMenu()">عن الشركة</a>
+  <a href="#contact" onclick="closeMenu()">تواصل معنا</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-inner" data-aos="fade-up">
+    <div>
+      <h2>شركة الفهد الجديدة للمعدات الطبية</h2>
+      <p>حلول طبية موثوقة للمؤسسات الصحية والمراكز الطبية</p>
+      <a href="#about">عن الشركة</a>
+      <a href="#contact" style="margin-left:10px;">تواصل معنا</a>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Info -->
+<section class="quick-info container" data-aos="fade-up">
+  <div class="info-card">
+    <div class="info-item"><i class="fas fa-phone-alt"></i><strong>الهاتف</strong><br>0912188441</div>
+    <div class="info-item"><i class="fas fa-envelope"></i><strong>البريد</strong><br>elmagara.eti@gmail.com</div>
+    <div class="info-item"><i class="fas fa-map-marker-alt"></i><strong>الموقع</strong><br>ليبيا - طرابلس</div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" data-aos="fade-up">
+  <div class="container">
+    <div class="section-title">
+      <h2>من نحن</h2>
+      <p>نبذة عن شركة الفهد الجديدة للمعدات الطبية</p>
+    </div>
+    <div class="about">
+      <div class="card">
+        <h3>شركة الفهد الجديدة للمعدات الطبية</h3>
+        <p>هي شركة متخصصة في توريد وتوزيع الأجهزة والمستلزمات الطبية، وتعمل على تلبية احتياجات المستشفيات والمصحات والعيادات وفق معايير جودة مناسبة ومطابقة للمواصفات المعتمدة.</p>
+      </div>
+      <div class="card">
+        <h3>رؤيتنا ورسالتنا</h3>
+        <p>نسعى إلى بناء علاقات قائمة على الثقة والمصداقية مع عملائنا، من خلال الالتزام بخدمة ما بعد البيع، والاستجابة لمتطلبات القطاع الصحي.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section data-aos="fade-up">
+  <div class="container">
+    <div class="section-title"><h3>لماذا نحن</h3></div>
+    <div class="features">
+      <div class="feature"><i class="fas fa-award"></i>جودة معتمدة</div>
+      <div class="feature"><i class="fas fa-briefcase"></i>خبرة طويلة</div>
+      <div class="feature"><i class="fas fa-handshake"></i>التزام مهني</div>
+      <div class="feature"><i class="fas fa-headset"></i>دعم مستمر</div>
+    </div>
+  </div>
+</section>
+
+<!-- Map -->
+<!-- ====== Map Section ====== -->
+<section id="location" data-aos="fade-up">
+  <div class="container">
+    <div class="section-title">
+      <h3>موقعنا على الخريطة</h3>
+      <p>يمكنكم زيارتنا أو التواصل معنا لتحديد موعد</p>
+    </div>
+
+    <div class="map-box">
+      <!-- Google Map Embed -->
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3363.3926955904553!2d13.386428375653042!3d32.54236327376268!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzLCsDMyJzMyLjUiTiAxM8KwMjMnMjAuNCJF!5e0!3m2!1sen!2str!4v1767306653699!5m2!1sen!2str"
+        loading="lazy"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+
+      <!-- Map Info -->
+      <div class="map-info">
+        <h4>📍 مقر شركة الفهد الجديدة</h4>
+        <p>طرابلس – ليبيا</p>
+        <a href="https://maps.app.goo.gl/qgnXCv7RGoUAEvqN6" target="_blank">فتح الموقع في Google Maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" data-aos="fade-up">
+  <div class="container">
+    <div class="section-title"><h3>تواصل معنا</h3></div>
+    <div class="contact">
+      <div>
+        <p><strong>الهاتف:</strong> 0912188441</p>
+        <p><strong>البريد:</strong> elmagara.eti@gmail.com</p>
+      </div>
+      <form action="https://formspree.io/f/XYZ123" method="POST">
+        <input name="name" placeholder="الاسم" required>
+        <input name="phone" placeholder="الهاتف" required>
+        <textarea name="message" placeholder="رسالتك" required></textarea>
+        <button type="submit">إرسال</button>
+        <p id="form-message" style="color:green; display:none;">تم إرسال رسالتك بنجاح!</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  ©️ 2025 شركة الفهد الجديدة للمعدات الطبية
+</footer>
+
+<a href="https://wa.me/00218913144709" class="whatsapp-btn" target="_blank">💬</a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+AOS.init({duration:800, once:true});
+
+const menu = document.getElementById('menu');
+const overlay = document.getElementById('overlay');
+
+function openMenu(){
+  menu.classList.add('show');
+  overlay.classList.add('show');
+  document.body.style.overflow='hidden';
+}
+
+function closeMenu(){
+  menu.classList.remove('show');
+  overlay.classList.remove('show');
+  document.body.style.overflow='';
+}
+
+// Formspree message success
+const form = document.querySelector('form');
+const msg = document.getElementById('form-message');
+form.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const data = new FormData(form);
+  const response = await fetch(form.action,{method:form.method,body:data,headers:{'Accept':'application/json'}});
+  if(response.ok){ msg.style.display='block'; form.reset(); } 
+  else { alert("حدث خطأ أثناء إرسال الرسالة."); }
+});
+</script>
+
+</body>
+</html>
